@@ -3,15 +3,51 @@
 **********************************************************/
 
 #include <iostream>
+#include <fstream>
+#include <cstring>
 
 // ToDo
-// check if the user is root
-// help file
-// alternative args (eg.: -h or --help)
-// better layout
+// - check if the user is root
+// - help file
+// - alternative args (eg.: -h or --help)
+// - better layout
+// - add exceptions
+// - refactor readConfigFile()
+//   - it's opening and closing the file at every iteration
+//   - it should ignore lines starting with #
+//   - throw error if config file does not exist
+// - refactor stringExplode(), add delimiter as parameter
 
+char *stringExplode(char* stringToBeExploded){
+  // char *str = stringToBeExploded;
+  const char string_delimiter[2] = " ";
+  char *token;
 
-int main( int argc, char *argv[] ) {
+  while((token = strtok(stringToBeExploded, string_delimiter)) != NULL){
+    std::cout << "The token is: " << token << "\n";
+    return token;
+  }
+
+  return 0;
+}
+
+void readConfigFile() {
+  char *textFromConfigFile;
+  std::string stringFromConfigFile;
+  stringFromConfigFile = textFromConfigFile; // casting char* to string
+  std::ifstream readFromConfigFile("dthproxy_config.cfg");
+
+  int tmp_counter = 0;
+  while (getline (readFromConfigFile, stringFromConfigFile)) {
+    char *arg_output = stringExplode(textFromConfigFile);
+    std::cout << arg_output << tmp_counter << "\n";
+    tmp_counter++;
+  }
+
+  readFromConfigFile.close();   
+}
+
+int main(int argc, char *argv[]) {
   std::string input_interface, input_interface_ipcidr, output_interface;
   std::string clargs[7]; // command line arguments
   
@@ -45,6 +81,7 @@ int main( int argc, char *argv[] ) {
     }
   }
   else {
-    printf("No args expected. Will read from the config file.\n");
+    // No args entered. Will read from the config file.
+    readConfigFile();
   }
 }
