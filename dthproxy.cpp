@@ -1,11 +1,21 @@
+/**********************************************************
+ * Quebec, April 12, 2020 - dth [at] dthlabs [dot] com    *
+**********************************************************/
+
 #include <iostream>
-using namespace std;
+
+// ToDo
+// check if the user is root
+// help file
+// alternative args (eg.: -h or --help)
+// better layout
+
 
 int main( int argc, char *argv[] ) {
-  string input_interface, input_interface_ipcidr, output_interface;
-  string clargs[7]; // command line arguments
+  std::string input_interface, input_interface_ipcidr, output_interface;
+  std::string clargs[7]; // command line arguments
   
-  cout << "\n\n*** activating proxy\n\n";
+  std::cout << "\n\n*** activating proxy\n\n";
 
   if(argc == 7) {
     for (int i = 0; i < argc; i++) {
@@ -13,15 +23,15 @@ int main( int argc, char *argv[] ) {
 
       if (clargs[i] == "-input_interface") {
         input_interface = argv[i];
-        cout << "input_interface is: "<< argv[++i] << "\n";
+        std::cout << "input_interface is: "<< argv[++i] << "\n";
       }
       if (clargs[i] == "-input_interface_ipcidr") {
         input_interface_ipcidr = argv[i];
-        cout << "input_interface_ipcidr is: "<< argv[++i] << "\n";
+        std::cout << "input_interface_ipcidr is: "<< argv[++i] << "\n";
       }
       if (clargs[i] == "-output_interface") {
         output_interface = argv[i];
-        cout << "output_interface is: "<< argv[++i] << "\n";
+        std::cout << "output_interface is: "<< argv[++i] << "\n";
       }
     }
   }
@@ -29,9 +39,9 @@ int main( int argc, char *argv[] ) {
     clargs[1] = argv[1];
 
     if (clargs[1] == "--help") {
-      cout << "This is the help section. Bla bla bla.\n";
+      std::cout << "This is the help section. Bla bla bla.\n";
     } else {
-      cout << "Please enter 3 arguments. Or try: dthproxy --help.\n";
+      std::cout << "Please enter 3 arguments. Or try: dthproxy --help.\n";
     }
   }
   else {
