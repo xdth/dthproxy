@@ -18,7 +18,7 @@
 //   - throw error if config file does not exist
 // - refactor stringExplode(), add delimiter as parameter
 
-std::string stringExplode(char* stringToBeExploded){
+char *stringExplode(char* stringToBeExploded){
   // char *str = stringToBeExploded;
   const char string_delimiter[2] = " ";
   std::string token;
