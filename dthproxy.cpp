@@ -96,16 +96,13 @@ int main(int argc, char *argv[]) {
       clargs[i] = argv[i];
 
       if (clargs[i] == "-input_interface") {
-        input_interface = argv[i];
-        // std::cout << "input_interface is: "<< argv[++i] << "\n";
+        input_interface = argv[++i];
       }
       if (clargs[i] == "-input_interface_ipcidr") {
-        input_interface_ipcidr = argv[i];
-        // std::cout << "input_interface_ipcidr is: "<< argv[++i] << "\n";
+        input_interface_ipcidr = argv[++i];
       }
       if (clargs[i] == "-output_interface") {
-        output_interface = argv[i];
-        // std::cout << "output_interface is: "<< argv[++i] << "\n";
+        output_interface = argv[++i];
       }
     }
   }
@@ -119,10 +116,8 @@ int main(int argc, char *argv[]) {
     }
   }
   else {
-    std::cout << "argc is: " << argc << "\n";
     // No args entered. Will read from the config file.
-    std::cout << "nooooo";
-    // readConfigFile();
+    readConfigFile();
   }
 
   // test to see if the config variables were setup correctly from the file
