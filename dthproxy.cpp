@@ -40,7 +40,7 @@ std::string* stringExplode(const char* stringToBeExploded){
   // declaring the result array
   std::string* result = new std::string[array_size];
 
-  // second loop to build the array
+  // second loop to build the result array
   int array_index = 0;
   for (auto x : str) {
     if (x == ' ') {
@@ -97,15 +97,15 @@ int main(int argc, char *argv[]) {
 
       if (clargs[i] == "-input_interface") {
         input_interface = argv[i];
-        std::cout << "input_interface is: "<< argv[++i] << "\n";
+        // std::cout << "input_interface is: "<< argv[++i] << "\n";
       }
       if (clargs[i] == "-input_interface_ipcidr") {
         input_interface_ipcidr = argv[i];
-        std::cout << "input_interface_ipcidr is: "<< argv[++i] << "\n";
+        // std::cout << "input_interface_ipcidr is: "<< argv[++i] << "\n";
       }
       if (clargs[i] == "-output_interface") {
         output_interface = argv[i];
-        std::cout << "output_interface is: "<< argv[++i] << "\n";
+        // std::cout << "output_interface is: "<< argv[++i] << "\n";
       }
     }
   }
@@ -119,9 +119,10 @@ int main(int argc, char *argv[]) {
     }
   }
   else {
+    std::cout << "argc is: " << argc << "\n";
     // No args entered. Will read from the config file.
     std::cout << "nooooo";
-    readConfigFile();
+    // readConfigFile();
   }
 
   // test to see if the config variables were setup correctly from the file
