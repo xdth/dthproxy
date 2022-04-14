@@ -68,17 +68,17 @@ void readConfigFile() {
     std::string* result_array = stringExplode(stringFromConfigFile.c_str());
 
     switch (counter) {
-    case 0:
-      input_interface = result_array[1];
-      break;
-    case 1:
-      input_interface_ipcidr = result_array[1];
-      break;
-    case 2:
-      output_interface = result_array[1];
-      break;
-    default:
-      break;
+      case 0:
+        input_interface = result_array[1];
+        break;
+      case 1:
+        input_interface_ipcidr = result_array[1];
+        break;
+      case 2:
+        output_interface = result_array[1];
+        break;
+      default:
+        break;
     }
     
     counter++;
@@ -121,7 +121,7 @@ int main(int argc, char *argv[]) {
     readConfigFile();
   }
 
-  // test to see if the config variables were setup correctly from the file
+  // test to see if the config variables were setup correctly from the file or from the commandline args
   std::cout << "input_interface: " << input_interface << "\n";
   std::cout << "input_interface_ipcidr: " << input_interface_ipcidr << "\n";
   std::cout << "output_interface: " << output_interface << "\n"; 
