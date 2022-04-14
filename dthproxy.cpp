@@ -2,10 +2,6 @@
  * Quebec, April 12, 2020 - dth [at] dthlabs [dot] com    *
 **********************************************************/
 
-#include <iostream>
-#include <fstream>
-#include <cstring>
-
 // ToDo
 // - check if the user is root
 // - help file
@@ -18,37 +14,79 @@
 //   - throw error if config file does not exist
 // - refactor stringExplode(), add delimiter as parameter
 
-char *stringExplode(char* stringToBeExploded){
-  // char *str = stringToBeExploded;
-  const char string_delimiter[2] = " ";
-  std::string token;
+#include <iostream>
+#include <fstream>
 
-  while((token = strtok(stringToBeExploded, string_delimiter)) != NULL){
-    std::cout << "The token is: " << token << "\n";
-    return token;
+std::string input_interface, input_interface_ipcidr, output_interface;
+
+// Return an array containing the exploded strings
+std::string* stringExplode(const char* stringToBeExploded){
+  std::string str = stringToBeExploded;
+  std::string word = "";
+
+  // first loop to get the array size
+  int array_size = 0;
+  for (auto x : str) {
+    if (x == ' ') {
+      word = "";
+      array_size++;
+    } else {
+      word = word + x;
+    }
+  }
+  word = "";
+  array_size = ++array_size;
+
+  // declaring the result array
+  std::string* result = new std::string[array_size];
+
+  // second loop to build the array
+  int array_index = 0;
+  for (auto x : str) {
+    if (x == ' ') {
+      result[array_index] = word;
+      array_index++;
+      word = "";
+    } else {
+      word = word + x;
+    }
   }
 
-  return 0;
+  result[array_index] = word;
+
+  return result;
 }
 
 void readConfigFile() {
   char *textFromConfigFile;
-  std::string stringFromConfigFile;
-  stringFromConfigFile = textFromConfigFile; // casting char* to string
+  std::string stringFromConfigFile = textFromConfigFile; // casting char* to string
   std::ifstream readFromConfigFile("dthproxy_config.cfg");
 
-  int tmp_counter = 0;
+  int counter = 0;
   while (getline (readFromConfigFile, stringFromConfigFile)) {
-    char *arg_output = stringExplode(textFromConfigFile);
-    std::cout << arg_output << tmp_counter << "\n";
-    tmp_counter++;
+    std::string* result_array = stringExplode(stringFromConfigFile.c_str());
+
+    switch (counter) {
+    case 0:
+      input_interface = result_array[1];
+      break;
+    case 1:
+      input_interface_ipcidr = result_array[1];
+      break;
+    case 2:
+      output_interface = result_array[1];
+      break;
+    default:
+      break;
+    }
+    
+    counter++;
   }
 
   readFromConfigFile.close();   
 }
 
 int main(int argc, char *argv[]) {
-  std::string input_interface, input_interface_ipcidr, output_interface;
   std::string clargs[7]; // command line arguments
   
   std::cout << "\n\n*** activating proxy\n\n";
@@ -82,6 +120,14 @@ int main(int argc, char *argv[]) {
   }
   else {
     // No args entered. Will read from the config file.
+    std::cout << "nooooo";
     readConfigFile();
   }
+
+  // test to see if the config variables were setup correctly from the file
+  std::cout << "input_interface: " << input_interface << "\n";
+  std::cout << "input_interface_ipcidr: " << input_interface_ipcidr << "\n";
+  std::cout << "output_interface: " << output_interface << "\n"; 
+  
+  return 0;
 }
