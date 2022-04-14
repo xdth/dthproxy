@@ -13,7 +13,7 @@
 //   - it should ignore lines starting with #
 //   - throw error if config file does not exist
 // - refactor stringExplode(), add delimiter as parameter
-// hash maps for reading the config file
+// - hash maps for reading the config file
 
 #include <iostream>
 #include <fstream>
