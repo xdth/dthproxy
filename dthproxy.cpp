@@ -7,6 +7,7 @@
 
 //--------------------------------------------------------------------
 // ToDo
+//
 // - check if the user is root
 // - help file
 // - alternative args (eg.: -h or --help)
@@ -23,23 +24,27 @@
 
 //--------------------------------------------------------------------
 // Includes
+
 #include <iostream>
 #include <fstream>
 
 
 //--------------------------------------------------------------------
 // Config variables
+
 std::string input_interface, input_interface_ipcidr, output_interface;
 
 
 //--------------------------------------------------------------------
 // Function prototypes
+
 std::string* explodeString(const char* stringToBeExploded);
 void readConfigFile();
 
 
 //--------------------------------------------------------------------
 // Main
+
 int main(int argc, char *argv[]) {
   std::string clargs[7]; // command line arguments
   
