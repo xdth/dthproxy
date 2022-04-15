@@ -5,7 +5,6 @@
 
 //--------------------------------------------------------------------
 // ToDo
-//
 // - check if the user is root
 // - help file
 // - alternative args (eg.: -h or --help)
