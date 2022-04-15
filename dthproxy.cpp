@@ -16,7 +16,7 @@
 //   - it's opening and closing the file at every iteration
 //   - it should ignore lines starting with #
 //   - throw error if config file does not exist
-// - refactor stringExplode()
+// - refactor read_to_be_exploded()
 //   - add delimiter as parameter
 //   - hash maps for reading the config file
 
@@ -34,7 +34,7 @@ std::string input_interface, input_interface_ipcidr, output_interface;
 
 //--------------------------------------------------------------------
 // Function prototypes
-std::string* stringExplode(const char* stringToBeExploded);
+std::string* read_to_be_exploded(const char* stringToBeExploded);
 void readConfigFile();
 
 
@@ -85,9 +85,9 @@ int main(int argc, char *argv[]) {
 
 
 //--------------------------------------------------------------------
-// Function stringExplode()
+// Function read_to_be_exploded()
 // Return an array containing the exploded strings
-std::string* stringExplode(const char* stringToBeExploded){
+std::string* read_to_be_exploded(const char* stringToBeExploded){
   std::string str = stringToBeExploded;
   std::string word = "";
 
@@ -129,13 +129,13 @@ std::string* stringExplode(const char* stringToBeExploded){
 // Function readConfigFile()
 // Read the config file and set the config variables
 void readConfigFile() {
-  char *textFromConfigFile;
-  std::string stringFromConfigFile = textFromConfigFile; // casting char* to string
-  std::ifstream readFromConfigFile("dthproxy_config.cfg");
+  char *text_from_config_file;
+  std::string string_from_config_file = text_from_config_file; // casting char* to string
+  std::ifstream read_from_config_file("dthproxy_config.cfg");
 
   int counter = 0;
-  while (getline (readFromConfigFile, stringFromConfigFile)) {
-    std::string* result_array = stringExplode(stringFromConfigFile.c_str());
+  while (getline (read_from_config_file, string_from_config_file)) {
+    std::string* result_array = read_to_be_exploded(string_from_config_file.c_str());
 
     switch (counter) {
       case 0:
@@ -154,5 +154,5 @@ void readConfigFile() {
     counter++;
   }
 
-  readFromConfigFile.close();   
+  read_from_config_file.close();   
 }
