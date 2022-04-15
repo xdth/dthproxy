@@ -92,6 +92,7 @@ int main(int argc, char *argv[]) {
 //--------------------------------------------------------------------
 // Function explodeString()
 // Return an array containing the exploded strings
+
 std::string* explodeString(const char* stringToBeExploded){
   std::string str = stringToBeExploded;
   std::string word = "";
@@ -133,6 +134,7 @@ std::string* explodeString(const char* stringToBeExploded){
 //--------------------------------------------------------------------
 // Function readConfigFile()
 // Read the config file and set the config variables
+
 void readConfigFile() {
   char *text_from_config_file;
   std::string string_from_config_file = text_from_config_file; // casting char* to string
