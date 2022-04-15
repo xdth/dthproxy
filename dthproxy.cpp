@@ -16,7 +16,7 @@
 //   - it's opening and closing the file at every iteration
 //   - it should ignore lines starting with #
 //   - throw error if config file does not exist
-// - refactor read_to_be_exploded()
+// - refactor explodeString()
 //   - add delimiter as parameter
 //   - hash maps for reading the config file
 
@@ -34,7 +34,7 @@ std::string input_interface, input_interface_ipcidr, output_interface;
 
 //--------------------------------------------------------------------
 // Function prototypes
-std::string* read_to_be_exploded(const char* stringToBeExploded);
+std::string* explodeString(const char* stringToBeExploded);
 void readConfigFile();
 
 
@@ -85,9 +85,9 @@ int main(int argc, char *argv[]) {
 
 
 //--------------------------------------------------------------------
-// Function read_to_be_exploded()
+// Function explodeString()
 // Return an array containing the exploded strings
-std::string* read_to_be_exploded(const char* stringToBeExploded){
+std::string* explodeString(const char* stringToBeExploded){
   std::string str = stringToBeExploded;
   std::string word = "";
 
@@ -135,7 +135,7 @@ void readConfigFile() {
 
   int counter = 0;
   while (getline (read_from_config_file, string_from_config_file)) {
-    std::string* result_array = read_to_be_exploded(string_from_config_file.c_str());
+    std::string* result_array = explodeString(string_from_config_file.c_str());
 
     switch (counter) {
       case 0:
