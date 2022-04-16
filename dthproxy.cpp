@@ -104,7 +104,8 @@ int main(int argc, char *argv[]) {
 // Return true if root, false if otherwise
 
 bool amIroot() {
-  bool is_root = getuid() ? false : true;
+  bool is_root;
+  is_root = getuid() ? false : true;
 
   // if (is_root) {
   //   std::cout << "is root" << "\n";
