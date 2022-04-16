@@ -31,7 +31,7 @@
 //--------------------------------------------------------------------
 // Config variables
 
-std::string input_interface, input_interface_ipcidr, output_interface;
+std::string input_interface, input_interface_ipcidr, output_interface = "";
 
 
 //--------------------------------------------------------------------
@@ -40,7 +40,7 @@ std::string input_interface, input_interface_ipcidr, output_interface;
 bool amIroot();
 std::string* explodeString(const char* string_to_be_exploded);
 void readConfigFile();
-void help();
+int help();
 
 
 //--------------------------------------------------------------------
@@ -54,8 +54,6 @@ int main(int argc, char *argv[]) {
 
   std::string clargs[7]; // command line arguments
   
-  std::cout << "\n\n*** activating proxy\n\n";
-
   // if there are command line arguments
   if(argc == 7) {
     for (int i = 0; i < argc; i++) {
@@ -82,7 +80,7 @@ int main(int argc, char *argv[]) {
     clargs[1] = argv[1];
 
     if (clargs[1] == "--help" || clargs[1] == "-h") {
-      std::cout << "This is the help section. Bla bla bla.\n";
+      help();
     } else {
       std::cout << "Please enter 3 arguments. Or try: dthproxy --help.\n";
     }
@@ -92,10 +90,13 @@ int main(int argc, char *argv[]) {
     readConfigFile();
   }
 
-  // test to see if the config variables were setup correctly from the file or from the commandline args
-  std::cout << "input_interface: " << input_interface << "\n";
-  std::cout << "input_interface_ipcidr: " << input_interface_ipcidr << "\n";
-  std::cout << "output_interface: " << output_interface << "\n"; 
+  // proceed if all arguments are there
+  if(input_interface != "" && input_interface_ipcidr != "" && output_interface != "" ){
+    std::cout << "\n\n*** activating proxy\n\n";
+    std::cout << "input_interface: " << input_interface << "\n";
+    std::cout << "input_interface_ipcidr: " << input_interface_ipcidr << "\n";
+    std::cout << "output_interface: " << output_interface << "\n";     
+  }
   
   return 0;
 }
@@ -191,7 +192,8 @@ void readConfigFile() {
 // Function help()
 // Provides help on how to use the program
 
-void help() {
+int help() {
   std::cout << "Welcome to dthproxy.\n";
   std::cout << "You need to input 3 arguments: etc, etc, etc.\n";
+  return 0;
 }
