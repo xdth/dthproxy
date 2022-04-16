@@ -47,13 +47,9 @@ void readConfigFile();
 // Main
 
 int main(int argc, char *argv[]) {
-  // amIroot() && return 0;
-
-  if(amIroot()) {
-    // return 0;
-    std::cout << "you are root \n" << std::endl;
-  } else {
-    std::cout << "you are not root \n" << std::endl;
+  if(!amIroot()) {
+    std::cout << "Only root can run this program. \n";
+    return 0;
   }
 
   std::string clargs[7]; // command line arguments
@@ -104,14 +100,7 @@ int main(int argc, char *argv[]) {
 // Return true if root, false if otherwise
 
 bool amIroot() {
-  bool is_root;
-  is_root = getuid() ? false : true;
-
-  // if (is_root) {
-  //   std::cout << "is root" << "\n";
-  // } else {
-  //   std::cout << "is not root" << "\n";
-  // }
+  bool is_root = getuid() ? false : true;
   return is_root;
 }
 
