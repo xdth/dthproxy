@@ -9,7 +9,6 @@
 // ToDo
 //
 // - help file
-// - alternative args (eg.: -h or --help)
 // - better layout
 // - add exceptions
 // - refactor readConfigFile()
@@ -50,7 +49,7 @@ void help();
 int main(int argc, char *argv[]) {
   if(!amIroot()) {
     std::cout << "Only root can run this program. \n";
-    return 0;
+    // return 0;
   }
 
   std::string clargs[7]; // command line arguments
@@ -62,21 +61,27 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < argc; i++) {
       clargs[i] = argv[i];
 
-      if (clargs[i] == "-input_interface") {
+      if (clargs[i] == "--input_interface" || clargs[i] == "-i") {
         input_interface = argv[++i];
       }
-      if (clargs[i] == "-input_interface_ipcidr") {
+      else if (clargs[i] == "--input_interface_ipcidr" || clargs[i] == "-c") {
         input_interface_ipcidr = argv[++i];
       }
-      if (clargs[i] == "-output_interface") {
+      else if (clargs[i] == "--output_interface" || clargs[i] == "-o") {
         output_interface = argv[++i];
+      }
+      else {
+        if (clargs[i] != clargs[0]) { // if wrong argument is not the executable's name
+          std::cout << "Invalid option: " << clargs[i] << "\n";
+          return 1;
+        }
       }
     }
   }
   else if(argc > 1 && argc < 7 || argc > 7) {
     clargs[1] = argv[1];
 
-    if (clargs[1] == "--help") {
+    if (clargs[1] == "--help" || clargs[1] == "-h") {
       std::cout << "This is the help section. Bla bla bla.\n";
     } else {
       std::cout << "Please enter 3 arguments. Or try: dthproxy --help.\n";
