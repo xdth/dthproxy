@@ -27,7 +27,7 @@
 
 #include <iostream>
 #include <fstream>
-
+#include <unistd.h>
 
 //--------------------------------------------------------------------
 // Config variables
@@ -38,7 +38,8 @@ std::string input_interface, input_interface_ipcidr, output_interface;
 //--------------------------------------------------------------------
 // Function prototypes
 
-std::string* explodeString(const char* stringToBeExploded);
+bool amIroot();
+std::string* explodeString(const char* string_to_be_exploded);
 void readConfigFile();
 
 
@@ -46,6 +47,15 @@ void readConfigFile();
 // Main
 
 int main(int argc, char *argv[]) {
+  // amIroot() && return 0;
+
+  if(amIroot()) {
+    // return 0;
+    std::cout << "you are root \n" << std::endl;
+  } else {
+    std::cout << "you are not root \n" << std::endl;
+  }
+
   std::string clargs[7]; // command line arguments
   
   std::cout << "\n\n*** activating proxy\n\n";
@@ -90,11 +100,27 @@ int main(int argc, char *argv[]) {
 
 
 //--------------------------------------------------------------------
+// Function amIroot()
+// Return true if root, false if otherwise
+
+bool amIroot() {
+  bool is_root = getuid() ? false : true;
+
+  // if (is_root) {
+  //   std::cout << "is root" << "\n";
+  // } else {
+  //   std::cout << "is not root" << "\n";
+  // }
+  return is_root;
+}
+
+
+//--------------------------------------------------------------------
 // Function explodeString()
 // Return an array containing the exploded strings
 
-std::string* explodeString(const char* stringToBeExploded){
-  std::string str = stringToBeExploded;
+std::string* explodeString(const char* string_to_be_exploded){
+  std::string str = string_to_be_exploded;
   std::string word = "";
 
   // first loop to get the array size
