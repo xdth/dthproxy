@@ -29,3 +29,6 @@ echo "---------------------------------------------------------------------"
 echo "Running the program without arguments: "
 echo ""
 g++ dthproxy.cpp -o dthproxy && ./dthproxy
+echo ""
+echo ""
+echo "End of tests"
