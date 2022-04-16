@@ -47,10 +47,10 @@ int help();
 // Main
 
 int main(int argc, char *argv[]) {
-  if(!amIroot()) {
-    std::cout << "Only root can run this program. \n";
-    // return 0;
-  }
+  // if(!amIroot()) {
+  //   std::cout << "Only root can run this program. \n";
+  //   // return 0;
+  // }
 
   std::string clargs[7]; // command line arguments
   
@@ -91,12 +91,12 @@ int main(int argc, char *argv[]) {
   }
 
   // proceed if all arguments are there
-  if(input_interface != "" && input_interface_ipcidr != "" && output_interface != "" ){
-    std::cout << "\n\n*** activating proxy\n\n";
-    std::cout << "input_interface: " << input_interface << "\n";
-    std::cout << "input_interface_ipcidr: " << input_interface_ipcidr << "\n";
-    std::cout << "output_interface: " << output_interface << "\n";     
-  }
+  // if(input_interface != "" && input_interface_ipcidr != "" && output_interface != "" ){
+  //   std::cout << "\n\n*** activating proxy\n\n";
+  //   std::cout << "input_interface: " << input_interface << "\n";
+  //   std::cout << "input_interface_ipcidr: " << input_interface_ipcidr << "\n";
+  //   std::cout << "output_interface: " << output_interface << "\n";     
+  // }
   
   return 0;
 }
@@ -163,28 +163,28 @@ void readConfigFile() {
   std::string string_from_config_file = text_from_config_file; // casting char* to string
   std::ifstream read_from_config_file("dthproxy_config.cfg");
 
-  int counter = 0;
-  while (getline (read_from_config_file, string_from_config_file)) {
-    std::string* result_array = explodeString(string_from_config_file.c_str());
+  // int counter = 0;
+  // while (getline (read_from_config_file, string_from_config_file)) {
+  //   std::string* result_array = explodeString(string_from_config_file.c_str());
 
-    switch (counter) {
-      case 0:
-        input_interface = result_array[1];
-        break;
-      case 1:
-        input_interface_ipcidr = result_array[1];
-        break;
-      case 2:
-        output_interface = result_array[1];
-        break;
-      default:
-        break;
-    }
+  //   switch (counter) {
+  //     case 0:
+  //       input_interface = result_array[1];
+  //       break;
+  //     case 1:
+  //       input_interface_ipcidr = result_array[1];
+  //       break;
+  //     case 2:
+  //       output_interface = result_array[1];
+  //       break;
+  //     default:
+  //       break;
+  //   }
     
-    counter++;
-  }
+  //   counter++;
+  // }
 
-  read_from_config_file.close();   
+  // read_from_config_file.close();
 }
 
 
