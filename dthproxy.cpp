@@ -8,7 +8,6 @@
 //--------------------------------------------------------------------
 // ToDo
 //
-// - check if the user is root
 // - help file
 // - alternative args (eg.: -h or --help)
 // - better layout
@@ -29,6 +28,7 @@
 #include <fstream>
 #include <unistd.h>
 
+
 //--------------------------------------------------------------------
 // Config variables
 
@@ -41,6 +41,7 @@ std::string input_interface, input_interface_ipcidr, output_interface;
 bool amIroot();
 std::string* explodeString(const char* string_to_be_exploded);
 void readConfigFile();
+void help();
 
 
 //--------------------------------------------------------------------
@@ -178,4 +179,14 @@ void readConfigFile() {
   }
 
   read_from_config_file.close();   
+}
+
+
+//--------------------------------------------------------------------
+// Function help()
+// Provides help on how to use the program
+
+void help() {
+  std::cout << "Welcome to dthproxy.\n";
+  std::cout << "You need to input 3 arguments: etc, etc, etc.\n";
 }
